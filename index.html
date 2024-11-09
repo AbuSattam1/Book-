@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة صلة للكتب الجديدة والمستخدمة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>نموذج مكتبة صلة</h1>
+    <div class="container">
+        <form id="libraryForm">
+            <label for="fullName">الاسم الثلاثي:</label>
+            <input type="text" id="fullName" required>
+            
+            <label for="universityID">الرقم الجامعي:</label>
+            <input type="text" id="universityID" required pattern="\d*" maxlength="10">
+
+            <label for="phoneNumber">رقم الجوال:</label>
+            <input type="tel" id="phoneNumber" required pattern="\d*" maxlength="10">
+            
+            <label for="actionType">الاختيار:</label>
+            <select id="actionType" onchange="toggleFields()" required>
+                <option value="">اختر نوع المعاملة</option>
+                <option value="borrow">استعارة كتاب</option>
+                <option value="donate">إعارة كتاب</option>
+            </select>
+
+            <div id="borrowOptions" class="hidden">
+                <div class="section-header">خيارات الاستعارة</div>
+                <label for="loanType">نوع الاستعارة:</label>
+                <select id="loanType" onchange="toggleLoanDetails()" required>
+                    <option value="">اختر نوع الاستعارة</option>
+                    <option value="permanent">دائم</option>
+                    <option value="temporary">مؤقت</option>
+                </select>
+
+                <div id="permanentOptions" class="hidden">
+                    <p><strong>تعريف الاستعارة:</strong> الكتاب دائم ولا يسترجع ويوضع بداله كتاب آخر منك.</p>
+                    <label for="permanentBookName">اسم الكتاب المراد استعارته:</label>
+                    <input type="text" id="permanentBookName" required>
+                    
+                    <label for="replacementBookName">اسم الكتاب البديل:</label>
+                    <input type="text" id="replacementBookName" required>
+                </div>
+
+                <div id="temporaryOptions" class="hidden">
+                    <p><strong>تعريف الاستعارة:</strong> الكتاب مؤقت ويسترجع حسب سياسة مكتبة صلة.</p>
+                    <label for="temporaryBookName">اسم الكتاب المراد استعارته مؤقتاً:</label>
+                    <input type="text" id="temporaryBookName" required>
+
+                    <label for="loanEndDate">تاريخ انتهاء الاستعارة:</label>
+                    <input type="date" id="loanEndDate" required>
+                </div>
+            </div>
+
+            <div id="donateOptions" class="hidden">
+                <div class="section-header">خيارات الإعارة</div>
+                <p>إعطاء الكتاب للمكتبة.</p>
+                <label for="donatedBookName">اسم الكتاب:</label>
+                <input type="text" id="donatedBookName" required>
+
+                <label for="bookCondition">حالة الكتاب:</label>
+                <select id="bookCondition" required>
+                    <option value="">اختر حالة الكتاب</option>
+                    <option value="new">جديد</option>
+                    <option value="excellent">الكتاب في حالة ممتازة</option>
+                    <option value="average">الكتاب متوسط الحالة</option>
+                    <option value="damaged">الكتاب تالف</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="submitForm()">إرسال</button>
+            <div id="responseMessage" class="message hidden"></div>
+            <div id="errorMessage" class="error hidden"></div>
+        </form>
+    </div>
+
+    <footer>عمل الطالبة ليلى</footer>
+    <script src="script.js"></script>
+</body>
+</html>
